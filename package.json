@@ -1,0 +1,14 @@
+{
+  "name": "@ericpowelldev/tools",
+  "version": "0.1.0",
+  "author": "Eric Powell",
+  "description": "A utility package with standardized JavaScript functions.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.2"
+  }
+}
