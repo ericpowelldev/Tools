@@ -19,7 +19,7 @@ const log_utils = false;
 const dirtyText = ` Hello! I... am Eric: The greatest of all time <insert_cool-here>.   `;
 const testText = `test text. for normal text functions.`;
 const breakText = `  test+Camel_snake-kebab, sPace case. `;
-const phoneNumber = `8045176815`;
+const phoneNumber = `8005551234`;
 const numbersArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const timestamp = `2022-06-01T00:00:00.000+00:00`;
 
