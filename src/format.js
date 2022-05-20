@@ -1,3 +1,5 @@
+"use strict";
+
 // DEPENDENCIES ---------------------------------------------------------------- //
 
 // Regex text patterns

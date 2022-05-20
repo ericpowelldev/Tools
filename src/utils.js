@@ -1,3 +1,5 @@
+"use strict";
+
 // FUNCTIONS: GENERAL ---------------------------------------------------------------- //
 
 /** Dig into a nested object and avoid type errors

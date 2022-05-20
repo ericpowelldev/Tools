@@ -1,3 +1,5 @@
+"use strict";
+
 // DEPENDENCIES ---------------------------------------------------------------- //
 
 const dayjs = require(`dayjs`);
