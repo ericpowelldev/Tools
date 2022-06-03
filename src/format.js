@@ -164,9 +164,9 @@ const spaceCase = (str = null, type = null, allowBreaks = true) => {
 };
 
 /** General text case formatting
- * @param {String} str - String to edit
- * @param {String} caseType - Text case type to format to
- * @param {Boolean} allowBreaks - Allow breaks within the formatted text
+ * @param {string} str - String to edit
+ * @param {string} caseType - Text case type to format to
+ * @param {boolean} allowBreaks - Allow breaks within the formatted text
  */
 const text = (str = null, caseType = null, allowBreaks = true) => {
   try {
@@ -197,32 +197,77 @@ const text = (str = null, caseType = null, allowBreaks = true) => {
 
 // FUNCTIONS: PHONE ---------------------------------------------------------------- //
 
-/** Format a phone number string to the human-readable standard */
+/** Format a phone number string to be human-readable */
 const phone = (input = null, allowBreaks = true) => {
-  try {
-    // Parse options
-    let space = ` `;
-    let kebab = `-`;
-    if (!allowBreaks) {
-      space = `\xa0`;
-      kebab = `-\u2060`;
-    }
+  // Parse options
+  let space = bsp;
+  let kebab = bkb;
+  if (!allowBreaks) {
+    space = nbsp;
+    kebab = nbkb;
+  }
 
-    // Parse input & apply options
-    if (input) {
-      let cleaned = (`` + input).replace(/\D/g, ``);
-      let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
-      if (match) {
-        let intlCode = match[1] ? `+1 ` : ``;
-        return [intlCode, `(`, match[2], `)${space}`, match[3], kebab, match[4]].join(``);
-      }
+  // Parse input & apply options
+  if (input) {
+    let cleaned = (`` + input).replace(/\D/g, ``);
+    let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      let intlCode = match[1] ? `+1 ` : ``;
+      return [intlCode, `(`, match[2], `)${space}`, match[3], kebab, match[4]].join(``);
     }
-  } catch (err) {
-    console.error(`Failed to format phone number:`, err);
   }
 
   // Fallback to returning the input
   return input;
+};
+
+// FUNCTIONS: MONEY ---------------------------------------------------------------- //
+
+/** Format a number into a monetary value string */
+const money = (amount = 0, sign = `$`) => {
+  if (Number(amount) && typeof sign === `string`) return sign + Number(amount).toFixed(2);
+  if (Number(amount)) return `$` + Number(amount).toFixed(2);
+  if (typeof sign === `string`) return sign + `0.00`;
+  return `$0.00`;
+};
+
+// FUNCTIONS: TRIM ---------------------------------------------------------------- //
+
+/** Strip to the last N digits of a string
+ ** N defautls to 8
+ */
+const stripDigits = (str = ``, n = 8) => {
+  if (str && typeof str === `string` && str.length > n) return str.slice(-n);
+  return str;
+};
+
+// FUNCTIONS: JSON ---------------------------------------------------------------- //
+
+/** Hide circular references in a json object */
+const circularJSONStringify = (json, hiddenProperties = []) => {
+  let cache = [];
+  let formattedJson = ``;
+  try {
+    formattedJson = JSON.stringify(
+      json,
+      (key, value) => {
+        if (typeof value === `object` && value !== null) {
+          // Duplicate reference found, discard key
+          if (cache.includes(value)) return;
+
+          // Store value in our collection
+          cache.push(value);
+        }
+        return hiddenProperties.includes(key) ? `<HIDDEN>` : value;
+      },
+      2
+    );
+  } catch (error) {
+    console.error(`Failed JSON.stringify() on circular object: ${error.message}`, json, error);
+  } finally {
+    cache = null;
+    return formattedJson;
+  }
 };
 
 // EXPORT ---------------------------------------------------------------- //
@@ -241,4 +286,7 @@ module.exports = {
   spaceCase,
   text,
   phone,
+  money,
+  stripDigits,
+  circularJSONStringify,
 };

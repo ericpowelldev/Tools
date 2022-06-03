@@ -24,9 +24,9 @@ dayjs.extend(weekday);
 // FUNCTIONS ---------------------------------------------------------------- //
 
 /** Pass in an optional timestamp and get a time object
- * @param {String} timestamp - (Optional) Timestamp string or dayjs object
- * @param {Object} options - (Optional) Pass in options (utc)
- * @returns {String} - Timestamp string
+ * @param {string} timestamp - (Optional) Timestamp string or dayjs object
+ * @param {object} options - (Optional) Pass in options (utc)
+ * @returns {string} - Timestamp string
  */
 const object = (timestamp = null, options = {}) => {
   try {
@@ -55,9 +55,9 @@ const object = (timestamp = null, options = {}) => {
 };
 
 /** Pass in an optional timestamp and format it
- * @param {String} timestamp - (Optional) Timestamp string or dayjs object
- * @param {Object} options - (Optional) Pass in options (utc, format)
- * @returns {String} - Timestamp string
+ * @param {string} timestamp - (Optional) Timestamp string or dayjs object
+ * @param {object} options - (Optional) Pass in options (utc, format)
+ * @returns {string} - Timestamp string
  */
 const stamp = (timestamp = null, options = {}) => {
   try {
@@ -90,9 +90,29 @@ const stamp = (timestamp = null, options = {}) => {
   return null;
 };
 
+/** Get the difference between two times (default in seconds) */
+const diff = (timestamp1 = ``, timestamp2 = ``, config = {}) => {
+  let myConfig = {
+    absolute: true,
+    unit: `second`,
+    ...config,
+  };
+
+  let timeObj1 = dayjs(timestamp1);
+  let timeObj2 = dayjs(timestamp2);
+
+  if (timeObj1 && timeObj2) {
+    let duration = timeObj2.diff(timeObj1, myConfig.unit);
+    if (myConfig.absolute) duration = Math.abs(duration);
+    return duration;
+  }
+  return 0;
+};
+
 // EXPORT ---------------------------------------------------------------- //
 
 module.exports = {
   object,
   stamp,
+  diff,
 };

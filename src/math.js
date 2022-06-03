@@ -1,103 +1,135 @@
 "use strict";
 
+const { isArrayWithValues } = require(`./utils`);
+
 // FUNCTIONS ---------------------------------------------------------------- //
 
-/** Function for adding parameters */
-const add = (a, b) => {
-  return parseFloat(a) + parseFloat(b);
+/** Add two numbers */
+const add = (a = 0, b = 0) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Number(a) + Number(b);
 };
 
-/** Function for subtracting parameters [subtract(4, 3)] */
-const subtract = (a, b) => {
-  return parseFloat(a) - parseFloat(b);
+/** Subtract two numbers */
+const subtract = (a = 0, b = 0) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Number(a) - Number(b);
 };
 
-/** Function for multiplying parameters */
-const multiply = (a, b) => {
-  return parseFloat(a) * parseFloat(b);
+/** Multiply two numbers */
+const multiply = (a = 0, b = 0) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Number(a) * Number(b);
 };
 
-/** Function for dividing parameters */
-const divide = (a, b) => {
-  return parseFloat(a) / parseFloat(b);
+/** Divide two numbers */
+const divide = (a = 0, b = 0) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Number(a) / Number(b);
 };
 
-/** Function for returning the power of a number */
-const power = (num, exp) => {
-  return Math.pow(parseFloat(num), parseFloat(exp));
+/** Calculate the power of a number */
+const power = (num = 0, exp = 1) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Math.pow(Number(num), Number(exp));
 };
 
-/** Function for finding the remainder between parameters after division (Used with divide) */
-const remainder = (a, b) => {
-  return parseFloat(a) % parseFloat(b);
+/** Calculate the remainder between two numbers */
+const remainder = (a = 0, b = 0) => {
+  if (isNaN(a) || isNaN(b)) return undefined;
+  return Number(a) % Number(b);
 };
 
-/** Function for finding the average in an array */
-const average = (array) => {
-  let total = 0;
-  for (let i = 0; i < array.length; i++) {
-    total += array[i];
+/** Find the average in an array */
+const average = (array = []) => {
+  if (isArrayWithValues(array)) {
+    let sum = array.reduce((total, current) => total + current, 0);
+    return sum / array.length;
   }
-  return total / array.length;
+  return undefined;
 };
 
-/** Function for finding the minimum in an array */
-const min = (array) => {
-  let currentMin = array[0];
-  for (let i = 1; i < array.length; i++) {
-    if (array[i] < currentMin) currentMin = array[i];
+/** Find the lowest number in an array */
+const min = (array = []) => {
+  if (isArrayWithValues(array)) {
+    let currentMin = array[0];
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] < currentMin) currentMin = array[i];
+    }
+    return currentMin;
   }
-  return currentMin;
+  return undefined;
 };
 
-/** Function for finding the maximum in an array */
-const max = (array) => {
-  let currentMax = array[0];
-  for (let i = 1; i < array.length; i++) {
-    if (array[i] > currentMax) currentMax = array[i];
+/** Find the highest number in an array */
+const max = (array = []) => {
+  if (isArrayWithValues(array)) {
+    let currentMax = array[0];
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] > currentMax) currentMax = array[i];
+    }
+    return currentMax;
   }
-  return currentMax;
+  return undefined;
 };
 
-/** Function to solve for "x" in an algebraic equation */
-const algebra = (equation) => {
-  var xIndex = equation.indexOf("x");
-  var signIndex = xIndex + 1;
-  var equalIndex = equation.indexOf("=");
-  var a = parseFloat(equation.substring(0, xIndex));
-  var sign = equation[signIndex];
-  var b = parseFloat(equation.substring(signIndex + 1, equalIndex));
-  var c = parseFloat(equation.substring(equalIndex + 1, equation.length));
+/** Solve for `x` in an algebraic equation */
+const algebra = (equation = ``) => {
+  if (equation && typeof equation === `string`) {
+    var xIndex = equation.indexOf(`x`);
+    var signIndex = xIndex + 1;
+    var equalIndex = equation.indexOf(`=`);
+    var a = parseFloat(equation.substring(0, xIndex));
+    var sign = equation[signIndex];
+    var b = parseFloat(equation.substring(signIndex + 1, equalIndex));
+    var c = parseFloat(equation.substring(equalIndex + 1, equation.length));
 
-  if (sign === "+") return (c - b) / a;
-  else if (sign === "-") return (c + b) / a;
-  else if (sign === "*") return c / b / a;
-  else if (sign === "/") return (c * b) / a;
-  else return undefined;
+    if (sign === `+`) return (c - b) / a;
+    if (sign === `-`) return (c + b) / a;
+    if (sign === `*`) return c / b / a;
+    if (sign === `/`) return (c * b) / a;
+  }
+  return null;
 };
 
-/** Function for a random float between 2 numbers
- * @param {Number} min - Minimum possible float
- * @param {Number} max - Maximum possible float
- * @returns {Number} Randomly generated float
+/** Roll a random float between 2 numbers
+ * @param {number} min - Minimum possible float
+ * @param {number} max - Maximum possible float
+ * @returns {number} Randomly generated float
  */
-const rdmFloat = (min, max) => {
+const rdmFloat = (min = 0, max = 1) => {
   if (isNaN(min) || isNaN(max)) return 0;
-  const myMin = parseFloat(min);
-  const myMax = parseFloat(max);
+  const myMin = Number(min);
+  const myMax = Number(max);
   return Math.random() * (myMax - myMin) + myMin;
 };
 
-/** Function for a random integer between 2 numbers
- * @param {Number} min - Minimum possible integer
- * @param {Number} max - Maximum possible integer
- * @returns {Number} Randomly generated integer
+/** Roll a random integer between 2 numbers
+ * @param {number} min - Minimum possible integer
+ * @param {number} max - Maximum possible integer
+ * @returns {number} Randomly generated integer
  */
-const rdmInt = (min, max) => {
+const rdmInt = (min = 0, max = 1) => {
   if (isNaN(min) || isNaN(max)) return 0;
-  const myMin = parseInt(min);
-  const myMax = parseInt(max);
+  const myMin = Number(min);
+  const myMax = Number(max);
   return Math.floor(Math.random() * (myMax - myMin + 1)) + myMin;
+};
+
+/** Round a number with a specified precision */
+const round = (num = 0, precision = 0) => {
+  if (Number(num)) {
+    const multiplier = Math.pow(10, precision);
+    const output = Math.round(num * multiplier) / multiplier;
+    return output;
+  }
+  return 0;
+};
+
+/** Clamp a number to zero if it's negative */
+const clampNeg = (num = 0) => {
+  if (Number(num) && Number(num) > 0) return Number(num);
+  return 0;
 };
 
 // EXPORT ---------------------------------------------------------------- //
@@ -115,4 +147,6 @@ module.exports = {
   algebra,
   rdmFloat,
   rdmInt,
+  round,
+  clampNeg,
 };

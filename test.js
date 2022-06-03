@@ -22,6 +22,7 @@ const breakText = `  test+Camel_snake-kebab, sPace case. `;
 const phoneNumber = `8005551234`;
 const numbersArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const timestamp = `2022-06-01T00:00:00.000+00:00`;
+const timestamp2 = `2022-07-01T00:00:00.000+00:00`;
 
 // TEST LOGS ---------------------------------------------------------------- //
 
@@ -81,19 +82,21 @@ if (_logs && log_time) {
   // console.log();
   // console.log(`Now, Object:`, time.object());
   // console.log(`Specific time, Object, UTC:`, time.object(timestamp, { utc: true, tz: `America/Phoenix` }));
+  // console.log();
+  // console.log(`UTC Object:`, time.object(timestamp, { utc: true }));
+  // console.log(`UTC Stamp:`, time.stamp(timestamp, { utc: true, format: `MM/DD/YYYY hh:mm A` }));
+  // console.log(`UTC Stamp ISO:`, time.stamp(timestamp, { utc: true }));
+  // console.log(`Local Object:`, time.object(timestamp));
+  // console.log(`Local Stamp:`, time.stamp(timestamp, { format: `MM/DD/YYYY hh:mm A` }));
+  // console.log(`Local Stamp ISO:`, time.stamp(timestamp));
+  // console.log(`Phoenix Object:`, time.object(timestamp, { tz: `America/Phoenix` }));
+  // console.log(`Phoenix Stamp:`, time.stamp(timestamp, { tz: `America/Phoenix`, format: `MM/DD/YYYY hh:mm A z` }));
+  // console.log(`Phoenix Stamp ISO:`, time.stamp(timestamp, { tz: `America/Phoenix` }));
+  // console.log(`New York Object:`, time.object(timestamp, { tz: `America/New_York` }));
+  // console.log(`New York Stamp:`, time.stamp(timestamp, { tz: `America/New_York`, format: `MM/DD/YYYY hh:mm A z` }));
+  // console.log(`New York Stamp ISO:`, time.stamp(timestamp, { tz: `America/New_York` }));
   console.log();
-  console.log(`UTC Object:`, time.object(timestamp, { utc: true }));
-  console.log(`UTC Stamp:`, time.stamp(timestamp, { utc: true, format: `MM/DD/YYYY hh:mm A` }));
-  console.log(`UTC Stamp ISO:`, time.stamp(timestamp, { utc: true }));
-  console.log(`Local Object:`, time.object(timestamp));
-  console.log(`Local Stamp:`, time.stamp(timestamp, { format: `MM/DD/YYYY hh:mm A` }));
-  console.log(`Local Stamp ISO:`, time.stamp(timestamp));
-  console.log(`Phoenix Object:`, time.object(timestamp, { tz: `America/Phoenix` }));
-  console.log(`Phoenix Stamp:`, time.stamp(timestamp, { tz: `America/Phoenix`, format: `MM/DD/YYYY hh:mm A z` }));
-  console.log(`Phoenix Stamp ISO:`, time.stamp(timestamp, { tz: `America/Phoenix` }));
-  console.log(`New York Object:`, time.object(timestamp, { tz: `America/New_York` }));
-  console.log(`New York Stamp:`, time.stamp(timestamp, { tz: `America/New_York`, format: `MM/DD/YYYY hh:mm A z` }));
-  console.log(`New York Stamp ISO:`, time.stamp(timestamp, { tz: `America/New_York` }));
+  console.log(`Difference:`, time.diff(timestamp, timestamp2));
 }
 
 if (_logs && log_utils) {
