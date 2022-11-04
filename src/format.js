@@ -223,12 +223,26 @@ const phone = (input = null, allowBreaks = true) => {
 
 // FUNCTIONS: MONEY ---------------------------------------------------------------- //
 
-/** Format a number into a monetary value string */
-const money = (amount = 0, sign = `$`) => {
-  if (Number(amount) && typeof sign === `string`) return sign + Number(amount).toFixed(2);
-  if (Number(amount)) return `$` + Number(amount).toFixed(2);
-  if (typeof sign === `string`) return sign + `0.00`;
-  return `$0.00`;
+/** Format a number or string number into a monetary value string */
+const moneyUSD = (value = null, options = {}) => {
+  const { returnNull = false, removeSign = false, removeCommas = false, removeCents = false } = options;
+
+  // Check for value and return null
+  if (!value && returnNull) return null;
+
+  // Remove spaces and commas so the value can be converted to a number
+  // Build the cleansed monetary string from the numeric value
+  const replacedValue = `${value}`.replace(/[,]/g, ``);
+  const numValue = Number(replacedValue) || 0;
+  let cleansedValue = "$" + numValue.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, `$1,`);
+
+  // Additional options
+  if (removeSign) cleansedValue = cleansedValue.replace(/[$]/g, ``);
+  if (removeCommas) cleansedValue = cleansedValue.replace(/[,]/g, ``);
+  if (removeCents) cleansedValue = cleansedValue.split(`.`)[0];
+
+  // Return cleansed monetary value
+  return cleansedValue;
 };
 
 // FUNCTIONS: TRIM ---------------------------------------------------------------- //
@@ -286,7 +300,7 @@ module.exports = {
   spaceCase,
   text,
   phone,
-  money,
+  moneyUSD,
   stripDigits,
   circularJSONStringify,
 };

@@ -40,11 +40,42 @@ const remainder = (a = 0, b = 0) => {
   return Number(a) % Number(b);
 };
 
-/** Find the average in an array */
+/** Find the average of an array */
 const average = (array = []) => {
   if (isArrayWithValues(array)) {
     let sum = array.reduce((total, current) => total + current, 0);
     return sum / array.length;
+  }
+  return undefined;
+};
+
+/** Find the mode of an array */
+const mode = (array = []) => {
+  if (isArrayWithValues(array)) {
+    {
+      array = array.slice().sort((x, y) => x - y);
+
+      var bestStreak = 1;
+      var bestElem = array[0];
+      var currentStreak = 1;
+      var currentElem = array[0];
+
+      for (let i = 1; i < array.length; i++) {
+        if (array[i - 1] !== array[i]) {
+          if (currentStreak > bestStreak) {
+            bestStreak = currentStreak;
+            bestElem = currentElem;
+          }
+
+          currentStreak = 0;
+          currentElem = array[i];
+        }
+
+        currentStreak++;
+      }
+
+      return currentStreak > bestStreak ? currentElem : bestElem;
+    }
   }
   return undefined;
 };
@@ -142,6 +173,7 @@ module.exports = {
   power,
   remainder,
   average,
+  mode,
   min,
   max,
   algebra,
