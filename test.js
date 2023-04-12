@@ -9,9 +9,9 @@ const utils = require(`./src/utils`);
 
 const _logs = true;
 
-const log_format = false;
+const log_format = true;
 const log_math = false;
-const log_time = true;
+const log_time = false;
 const log_utils = false;
 
 // TEST LOG VARIABLES ---------------------------------------------------------------- //
@@ -29,30 +29,31 @@ const timestamp2 = `2022-07-01T00:00:00.000+00:00`;
 if (_logs && log_format) {
   console.log(`\n<------------------------ FORMAT ------------------------>`);
   console.log();
-  console.log(`Cleanse text:           "${format.cleanseText(dirtyText)}"`);
-  console.log(`lower case:             "${format.text(testText, `lower`)}"`);
-  console.log(`Sentence case:          "${format.text(testText, `sentence`)}"`);
-  console.log(`Title Case:             "${format.text(testText, `title`)}"`);
-  console.log(`UPPER CASE:             "${format.text(testText, `upper`)}"`);
-  console.log(`condensedcase:          "${format.text(breakText, `condensed`)}"`);
-  console.log(`condensedsentencecase:  "${format.text(breakText, `condensed-sentence`)}"`);
-  console.log(`CONDENSEDUPPERCASE:     "${format.text(breakText, `condensed-upper`)}"`);
-  console.log(`camelCase:              "${format.text(breakText, `camel`)}"`);
-  console.log(`CamelSentenceCase:      "${format.text(breakText, `camel-sentence`)}"`);
-  console.log(`snake_case:             "${format.text(breakText, `snake`)}"`);
-  console.log(`Snake_sentence_case:    "${format.text(breakText, `snake-sentence`)}"`);
-  console.log(`Snake_Title_Case:       "${format.text(breakText, `snake-title`)}"`);
-  console.log(`SNAKE_UPPER_CASE:       "${format.text(breakText, `snake-upper`)}"`);
-  console.log(`kebab-case:             "${format.text(breakText, `kebab`, false)}"`);
-  console.log(`Kebab-sentence-case:    "${format.text(breakText, `kebab-sentence`, false)}"`);
-  console.log(`Kebab-Title-Case:       "${format.text(breakText, `kebab-title`, false)}"`);
-  console.log(`KEBAB-UPPER-CASE:       "${format.text(breakText, `kebab-upper`, false)}"`);
-  console.log(`space case:             "${format.text(breakText, `space`, false)}"`);
-  console.log(`Space sentence case:    "${format.text(breakText, `space-sentence`, false)}"`);
-  console.log(`Space Title Case:       "${format.text(breakText, `space-title`, false)}"`);
-  console.log(`SPACE UPPER CASE:       "${format.text(breakText, `space-upper`, false)}"`);
+  console.log(`Cleanse text:             "${format.cleanseText(dirtyText)}"`);
+  console.log(`lower case:               "${format.text(testText, `lower`)}"`);
+  console.log(`Sentence case:            "${format.text(testText, `sentence`)}"`);
+  console.log(`Title Case:               "${format.text(testText, `title`)}"`);
+  console.log(`UPPER CASE:               "${format.text(testText, `upper`)}"`);
+  console.log(`condensedcase:            "${format.text(breakText, `condensed`)}"`);
+  console.log(`condensedsentencecase:    "${format.text(breakText, `condensed-sentence`)}"`);
+  console.log(`CONDENSEDUPPERCASE:       "${format.text(breakText, `condensed-upper`)}"`);
+  console.log(`camelCase:                "${format.text(breakText, `camel`)}"`);
+  console.log(`CamelSentenceCase:        "${format.text(breakText, `camel-sentence`)}"`);
+  console.log(`snake_case:               "${format.text(breakText, `snake`)}"`);
+  console.log(`Snake_sentence_case:      "${format.text(breakText, `snake-sentence`)}"`);
+  console.log(`Snake_Title_Case:         "${format.text(breakText, `snake-title`)}"`);
+  console.log(`SNAKE_UPPER_CASE:         "${format.text(breakText, `snake-upper`)}"`);
+  console.log(`kebab-case:               "${format.text(breakText, `kebab`, false)}"`);
+  console.log(`Kebab-sentence-case:      "${format.text(breakText, `kebab-sentence`, false)}"`);
+  console.log(`Kebab-Title-Case:         "${format.text(breakText, `kebab-title`, false)}"`);
+  console.log(`KEBAB-UPPER-CASE:         "${format.text(breakText, `kebab-upper`, false)}"`);
+  console.log(`space case:               "${format.text(breakText, `space`, false)}"`);
+  console.log(`Space sentence case:      "${format.text(breakText, `space-sentence`, false)}"`);
+  console.log(`Space Title Case:         "${format.text(breakText, `space-title`, false)}"`);
+  console.log(`SPACE UPPER CASE:         "${format.text(breakText, `space-upper`, false)}"`);
   console.log();
-  console.log(`Format phone number:    "${format.phone(phoneNumber)}"`);
+  console.log(`Format phone number:      "${format.phone(phoneNumber)}"`);
+  console.log(`Format phone number flat: "${format.phoneFlat(phoneNumber)}"`);
 }
 
 if (_logs && log_math) {

@@ -53,12 +53,12 @@ const average = (array = []) => {
 const mode = (array = []) => {
   if (isArrayWithValues(array)) {
     {
-      array = array.slice().sort((x, y) => x - y);
+      array = array.slice().sort((a, b) => a - b);
 
-      var bestStreak = 1;
-      var bestElem = array[0];
-      var currentStreak = 1;
-      var currentElem = array[0];
+      let bestStreak = 1;
+      let bestElem = array[0];
+      let currentStreak = 1;
+      let currentElem = array[0];
 
       for (let i = 1; i < array.length; i++) {
         if (array[i - 1] !== array[i]) {

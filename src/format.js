@@ -198,8 +198,10 @@ const text = (str = null, caseType = null, allowBreaks = true) => {
 // FUNCTIONS: PHONE ---------------------------------------------------------------- //
 
 /** Format a phone number string to be human-readable */
-const phone = (input = null, allowBreaks = true) => {
-  // Parse options
+const phone = (input = null, options = {}) => {
+  const { allowBreaks = true, removeIntlCode = true } = options;
+
+  // Set breaks
   let space = bsp;
   let kebab = bkb;
   if (!allowBreaks) {
@@ -210,10 +212,26 @@ const phone = (input = null, allowBreaks = true) => {
   // Parse input & apply options
   if (input) {
     let cleaned = (`` + input).replace(/\D/g, ``);
-    let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    let match = cleaned.match(/^([0-9]+|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
-      let intlCode = match[1] ? `+1 ` : ``;
+      let intlCode = match[1] ? `+${match[1]} ` : `+1 `;
+      if (removeIntlCode) intlCode = ``;
       return [intlCode, `(`, match[2], `)${space}`, match[3], kebab, match[4]].join(``);
+    }
+  }
+
+  // Fallback to returning the input
+  return input;
+};
+
+/** Format a phone number string to be a flat string with an international code */
+const phoneFlat = (input = null) => {
+  // Parse input & apply options
+  if (input) {
+    let cleaned = (`` + input).replace(/\D/g, ``);
+    let match = cleaned.match(/^([0-9]+|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return [`+`, match[1] || `1`, match[2], match[3], match[4]].join(``);
     }
   }
 
@@ -300,6 +318,7 @@ module.exports = {
   spaceCase,
   text,
   phone,
+  phoneFlat,
   moneyUSD,
   stripDigits,
   circularJSONStringify,
